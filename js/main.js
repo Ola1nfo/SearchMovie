@@ -6,6 +6,8 @@ const h1 = document.querySelector('h1')
 window.addEventListener('keypress', e => {if(e.key === 'Enter')fetchData(generateURL())})
 search.addEventListener('click', () => {fetchData(generateURL())})
 
+window.addEventListener('load', renderHistory);
+
 function generateURL() {
     const filmName = document.querySelector('input').value.trim();
     const mainUrl = `https://www.omdbapi.com/?apikey=3f29323d&t=${filmName}&lang=ua`;
@@ -46,7 +48,14 @@ function showInfo(data){
     <li class="icon"><span style='color: rgb(128, 105, 0)'>Постер:</span><br><img src='${Poster}'></li>
     <li><span style='color: rgb(128, 105, 0)'>Подивитися фільм:</span> <a href='https://www.imdb.com/title/${imdbID}'><img class="movie" src="./img/free-animated-icon-cinema-9121609.gif" alt=""></a></li>
     `
-    filmList.innerHTML = elements
+
+    filmList.classList.remove('visible'); 
+    setTimeout(() => {
+        filmList.innerHTML = elements;
+        filmList.classList.add('visible');
+    }, 100);
+
+    saveToHistory(Title);
 }
 
 function showErrorModal() {
@@ -56,3 +65,32 @@ function showErrorModal() {
 closeModalButton.addEventListener('click', () => {
     errorModal.style.display = 'none';
 });
+
+function saveToHistory(title) {
+    let history = JSON.parse(localStorage.getItem('filmHistory')) || [];
+    history = history.filter(item => item !== title);
+    history.unshift(title);
+    if (history.length > 5) history.pop();
+    localStorage.setItem('filmHistory', JSON.stringify(history));
+    renderHistory();
+}
+
+function renderHistory() {
+    const historyList = document.getElementById('historyList');
+    const history = JSON.parse(localStorage.getItem('filmHistory')) || [];
+
+    historyList.innerHTML = '';
+    history.forEach(title => {
+        const li = document.createElement('li');
+        li.textContent = title;
+        li.style.cursor = 'pointer';
+        li.style.color = 'blue';
+        li.addEventListener('click', () => {
+            document.querySelector('input').value = title;
+            fetchData(generateURL());
+        });
+        historyList.appendChild(li);
+    });
+}
+
+

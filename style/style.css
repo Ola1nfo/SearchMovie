@@ -69,6 +69,8 @@ h1 {
 #filmList {
     list-style-type: none;
     padding: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 #filmList li {
@@ -78,6 +80,10 @@ h1 {
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 22px;
+}
+
+#filmList.visible {
+    opacity: 1;
 }
 
 .movie{
