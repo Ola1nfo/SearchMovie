@@ -1,7 +1,7 @@
 const search = document.getElementById('search')
 const errorModal = document.getElementById('errorModal');
 const closeModalButton = document.getElementById('closeModal');
-const h1 = document.querySelector('h1')
+const h1 = document.querySelector('.h1')
 
 window.addEventListener('keypress', e => {if(e.key === 'Enter')fetchData(generateURL())})
 search.addEventListener('click', () => {fetchData(generateURL())})
@@ -46,7 +46,7 @@ function showInfo(data){
     <li><span style='color: rgb(128, 105, 0)'>Країна:</span> ${Country}</li>
     <li><span style='color: rgb(128, 105, 0)'>Актори:</span> ${Actors}</li>
     <li class="icon"><span style='color: rgb(128, 105, 0)'>Постер:</span><br><img src='${Poster}'></li>
-    <li><span style='color: rgb(128, 105, 0)'>Подивитися фільм:</span> <a href='https://www.imdb.com/title/${imdbID}'><img class="movie" src="./img/free-animated-icon-cinema-9121609.gif" alt=""></a></li>
+    <li><span style='color: rgb(128, 105, 0)'>Подивитися фільм:</span> <a href='https://www.imdb.com/title/${imdbID}'><img class="movie" src="./img/movie.gif" alt=""></a></li>
     `
 
     filmList.classList.remove('visible'); 
@@ -83,8 +83,6 @@ function renderHistory() {
     history.forEach(title => {
         const li = document.createElement('li');
         li.textContent = title;
-        li.style.cursor = 'pointer';
-        li.style.color = 'blue';
         li.addEventListener('click', () => {
             document.querySelector('input').value = title;
             fetchData(generateURL());

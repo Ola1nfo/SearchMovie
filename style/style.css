@@ -1,10 +1,20 @@
 body {
     background-image: url(../img/film-studies-hero.avif);
     background-size: cover;
-    /* background-repeat: no-repeat; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
     color: #333;
     margin: 0;
     padding: 0;
+    
+    font-family: Font;
+}
+
+@font-face {
+    font-family: Font;
+    src: url(../font/RubikDoodleShadow-Regular.ttf);
 }
 
 .box {
@@ -13,7 +23,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 30px auto;
-    max-width: 800px;
+    max-width: 900px;
 }
 
 header.container {
@@ -22,7 +32,6 @@ header.container {
 
 .row {
     display: flex;
-    align-items: center;
 }
 
 .form-control {
@@ -59,6 +68,13 @@ h1 {
     margin-top: 20px;
     margin-bottom: 15px;
     color: rgb(128, 105, 0);
+}
+
+.h1 {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: rgb(128, 105, 0);
     display: none;
 }
 
@@ -88,6 +104,36 @@ h1 {
 
 .movie{
     width: 50px;
+}
+
+#historyList li {
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-left: 24px;
+    font-size: 20px;
+}
+
+#historyList li::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 2px;
+    width: 27px;
+    height: 27px;
+    background-image: url('../img/movie.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#historyList li:hover {
+    background-color: #f0f0f0;
+    color: #000;
+    border-radius: 5px;
+}
+
+#historyList li:hover::before {
+    display: none;
 }
 
 .modal {
